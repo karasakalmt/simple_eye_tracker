@@ -9,4 +9,8 @@
 /Users/metekarasakal/Desktop/eye_tracking/main.c
 stdio.h
 -
+stdlib.h
+-
+string.h
+-
 
