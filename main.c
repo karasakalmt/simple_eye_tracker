@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <math.h>
 
 struct aoi{
     char name;
@@ -16,11 +14,9 @@ int aoiFinder(struct aoi[], int, int, int);
 void printAOIs(struct aoi[], int);
 void computeFixationCount(struct aoi[],char *,int, int);
 void computeDwellTime(struct aoi[],char *, int, int);
-int parentIndex(int);
 int leftIndex(int);
 int rightIndex(int);
 void swap(struct aoi[], int, int);
-int heapHeight(double);
 void heapify(struct aoi[], int, int, int);
 void buildHeap(struct aoi[], int, int);
 void heapSort(struct aoi[], int, int);
@@ -51,12 +47,9 @@ int main(int argc, char *argv[]) {//sortingCriteria, AOIsFile, DataFolder, Parti
 
     int people;
     people = atoi(argv[4]);
-    printAOIs(aois, len_aoi);
     computeFixationCount(aois, argv[3], people, len_aoi);
     computeDwellTime(aois, argv[3], people, len_aoi);
-    printAOIs(aois, len_aoi);
-    buildHeap(aois,atoi(argv[1]),len_aoi);
-    //heapSort(aois,2,len_aoi);
+    heapSort(aois,atoi(argv[1]),len_aoi);
     printAOIs(aois, 23);
 
     return 0;
@@ -79,9 +72,9 @@ void printAOIs(struct aoi aois[], int len)
 {
     int index;//Index of AOI
     printf("AOI Fixation-count Dwell-time\n");
-    for(index=1; index<len; index++)
+    for(index=len-1; index>0; index--)
     {
-        printf("%d %c\t%d\t%d ms\n",index, aois[index].name, aois[index].fixationCount, aois[index].dwellTime);
+        printf("%c\t%d\t%d ms\n", aois[index].name, aois[index].fixationCount, aois[index].dwellTime);
     }
 }
 
@@ -129,10 +122,6 @@ void computeDwellTime(struct aoi aois[],char *folder,int people, int len)
     }
 }
 
-int parentIndex(int index)
-{
-    return index/2;
-}
 int leftIndex(int index)
 {
     return index*2;
@@ -168,10 +157,7 @@ void swap(struct aoi aois[], int index_1, int index_2)
     aois[index_2].topLeftY = tmp.topLeftY;
     aois[index_2].topLeftX = tmp.topLeftX;
 }
-int heapHeight(double len)
-{
-    return ceil(log(len-1)/log(2))-1;
-}
+
 void heapify(struct aoi aois[], int index, int command, int arr_len)
 {
     int largest,left,right,l_index,r_index,parent;
@@ -181,23 +167,14 @@ void heapify(struct aoi aois[], int index, int command, int arr_len)
     if(command==1)
     {
         parent = aois[index].fixationCount;
-        printf(" index: %d parent: %c %d",index,aois[index].name,parent);
         left = aois[l_index].fixationCount;
-        printf(" index: %d left: %c %d",l_index,aois[l_index].name,left);
         right = aois[r_index].fixationCount;
-        printf(" index: %d right: %c %d\n",r_index,aois[r_index].name,right);
     }
     else
     {
         parent= aois[index].dwellTime;
-        printf(" parent: %c %d",aois[index].name,parent);
-
         left = aois[leftIndex(index)].dwellTime;
-        printf(" left: %c %d",aois[l_index].name,left);
-
         right = aois[rightIndex(index)].dwellTime;
-        printf(" right: %c %d\n",aois[r_index].name,right);
-
     }
     if(l_index<=arr_len+1 && left>parent)
     {
@@ -221,18 +198,17 @@ void buildHeap(struct aoi aois[], int command, int arr_len)
 {
     for(int index=arr_len/2; index>=1; index--)
     {
-        printf("%d\n",index);
         heapify(aois, index, command, arr_len);
     }
 }
 
-/*void heapSort(struct aoi aois[], int command, int arr_len)
+void heapSort(struct aoi aois[], int command, int arr_len)
 {
     buildHeap(aois, command, arr_len);
     for(int i=arr_len; i>2; i--)
     {
         swap(aois,1,i);
         arr_len--;
-        heapify(aois, i, command, arr_len);
+        heapify(aois, 1, command, i);
     }
-}*/
+}
