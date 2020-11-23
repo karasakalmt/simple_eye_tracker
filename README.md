@@ -6,7 +6,7 @@ It works with command line arguements which are:
 - **AOIsFile:** Area of intersets' file location, this file includes AOIs with the following properties name, top-left-x, width, top-left-y, and height respectively.  
 We have following properties in the structure of it:  
 ```C
-char name;  
+    char name;  
     int topLeftX;  
     int width;  
     int topLeftY;  
