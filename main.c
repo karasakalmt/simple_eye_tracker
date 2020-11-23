@@ -1,3 +1,8 @@
+/*
+ * Name & Surname: Mete Karasakal
+ * Student ID: 2315380
+ * Assignment: Eye-tracking Analyzer
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

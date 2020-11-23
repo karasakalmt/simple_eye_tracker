@@ -1,3 +1,0 @@
-/Users/metekarasakal/Desktop/eye_tracking/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/metekarasakal/Desktop/eye_tracking/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/metekarasakal/Desktop/eye_tracking/cmake-build-debug/CMakeFiles/eye_tracking.dir
